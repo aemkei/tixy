@@ -1,0 +1,16 @@
+x&t&y
+Math.sin(t)
+Math.tan(i+t)
+Math.tan(t*x)
+Math.tan(x*y*t/9)
+x-y
+i/t
+y & t * 4
+7-x ^ 7-y
+x & y
+i/256
+Math.cos(t + x * x)
+x-y-(6*t-16)
+i % t/8
+Math.sin(i*t/4)
+Math.sin(t**2)
