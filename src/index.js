@@ -3,6 +3,7 @@ const size = 16;
 const spacing = 1;
 const width = count * (size + spacing);
 
+const runner = document.getElementById("code-runner").contentWindow;
 const input = document.getElementById("input");
 const output = document.getElementById("output");
 const context = output.getContext("2d");
@@ -32,7 +33,7 @@ function updateCallback() {
   startTime = new Date();
 
   try {
-    callback = eval(`
+    callback = runner.eval(`
       (function f(t,i,x,y) {
         try {
           return ${code.replace(/\\/g, ';')};
