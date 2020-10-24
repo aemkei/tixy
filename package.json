@@ -4,15 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "parcel ./src/index.html",
-    "build": "parcel build ./src/index.html"
+    "start": "parcel ./src/index.html --open",
+    "clean": "rm dist/*.*",
+    "build": "parcel build ./src/index.html",
+    "firebase": "firebase deploy --only hosting",
+    "deploy": "npm run clean && npm run build && npm run firebase"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "cssnano": "^4.1.10",
+    "parcel-plugin-inline-source": "^1.0.0",
     "stylus": "^0.54.8"
   },
   "dependencies": {

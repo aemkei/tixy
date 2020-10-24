@@ -1,7 +1,11 @@
 # development
-parcel src/index.html
 
-# build
+```sh
+npm start
+```
 
-parcel build src/index.html
-firebase deploy --only hosting
+# build and deploy
+
+```sh
+npm run deploy
+```
