@@ -27,9 +27,19 @@ for (let y = 0; y < count; y++) {
 
 let callback;
 let startTime;
+let code;
+
+const url = new URL(document.location);
+
+if (url.searchParams.has("code")) {
+  input.value = decodeURIComponent(url.searchParams.get("code"));
+}
+
+
+console.log(url.searchParams);
 
 function updateCallback() {
-  const code = input.value;
+  code = input.value;
   startTime = new Date();
 
   try {
@@ -50,6 +60,11 @@ function updateCallback() {
 updateCallback();
 input.addEventListener("input", updateCallback);
 
+input.addEventListener("keypress", function(event){
+  if (event.code = "Enter"){
+    history.replaceState(null, code, '?code=' + encodeURIComponent(code))
+  }
+});
 
 
 function render() {
