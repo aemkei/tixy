@@ -10,10 +10,11 @@ y & t * 4
 7-x ^ 7-y
 x & y
 i/256
-Math.cos(t + x * x)
+Math.cos(t + x * x)push
 x-y-(6*t-16)
 i % t/8
 Math.sin(i*t/4)
 Math.sin(t**2)
 x*y*t/99
 ((y-7.5)**2+(x-7.5)**2)/t**3
+(x-7.5)**2+(y-7.5)**2<200*Math.sin(t)

@@ -35,9 +35,6 @@ if (url.searchParams.has("code")) {
   input.value = decodeURIComponent(url.searchParams.get("code"));
 }
 
-
-console.log(url.searchParams);
-
 function updateCallback() {
   code = input.value;
   startTime = new Date();
@@ -46,7 +43,7 @@ function updateCallback() {
     callback = runner.eval(`
       (function f(t,i,x,y) {
         try {
-          return ${code.replace(/\\/g, ';')};
+          return ${code.replace(/\\/g, ";")};
         } catch (error) {
           return error;
         }
@@ -60,12 +57,11 @@ function updateCallback() {
 updateCallback();
 input.addEventListener("input", updateCallback);
 
-input.addEventListener("keypress", function(event){
-  if (event.code = "Enter"){
-    history.replaceState(null, code, '?code=' + encodeURIComponent(code))
+input.addEventListener("keypress", function (event) {
+  if ((event.code = "Enter")) {
+    history.replaceState(null, code, "?code=" + encodeURIComponent(code));
   }
 });
-
 
 function render() {
   const time = (new Date() - startTime) / 1000;
@@ -81,20 +77,22 @@ function render() {
     for (let x = 0; x < count; x++) {
       index++;
 
-      let value = callback(time, index, x, y);
-      if (value < 0) {
-        value = 0;
-      }
-
-      if (value > 1) {
-        value = 1;
-      }
+      const value = callback(time, index, x, y);
       const offset = size / 2;
-      const radius = (value * size) / 2;
+      let color = "#FFF";
+      let radius = (value * size) / 2;
 
+      if (radius < 0) {
+        radius = -radius;
+        color = "#F24";
+      }
+
+      if (radius > size / 2) {
+        radius = size / 2;
+      }
 
       context.beginPath();
-      context.fillStyle =  "#FFF";
+      context.fillStyle = color;
       context.arc(
         x * (size + spacing) + offset,
         y * (size + spacing) + offset,
