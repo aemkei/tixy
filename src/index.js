@@ -3,8 +3,11 @@ const size = 16;
 const spacing = 1;
 const width = count * (size + spacing);
 
+import examples from './examples.json';
+
 const runner = document.getElementById("code-runner").contentWindow;
 const input = document.getElementById("input");
+const comment = document.getElementById("comment");
 const output = document.getElementById("output");
 const context = output.getContext("2d");
 
@@ -29,11 +32,17 @@ let callback;
 let startTime;
 let code;
 
-const url = new URL(document.location);
 
-if (url.searchParams.has("code")) {
-  input.value = decodeURIComponent(url.searchParams.get("code"));
+function readURL(){
+  const url = new URL(document.location);
+
+  if (url.searchParams.has("code")) {
+    input.value = url.searchParams.get("code");
+  }
 }
+
+readURL();
+
 
 function updateCallback() {
   code = input.value;
@@ -73,8 +82,8 @@ function render() {
 
   output.width = output.height = width;
   let index = 0;
-  for (let y = 0; y < count; y++) {
-    for (let x = 0; x < count; x++) {
+  for (let y = 1; y <= count; y++) {
+    for (let x = 1; x <= count; x++) {
       index++;
 
       const value = callback(time, index, x, y);
@@ -94,8 +103,8 @@ function render() {
       context.beginPath();
       context.fillStyle = color;
       context.arc(
-        x * (size + spacing) + offset,
-        y * (size + spacing) + offset,
+        x * (size + spacing) - offset,
+        y * (size + spacing) - offset,
         radius,
         0,
         2 * Math.PI
@@ -108,3 +117,36 @@ function render() {
 }
 
 render();
+
+function nextExample(){
+
+  const comments = Object.keys(examples);
+  const snippets = Object.values(examples);
+
+  let index = snippets.indexOf(code);
+
+  if (snippets[index + 1]){
+    index = index + 1;
+  } else {
+    index = 0;
+  }
+
+  const newCode = snippets[index];
+  const newComment = comments[index];
+
+  comment.innerText = `// ${newComment}`;
+  input.value = newCode;
+  history.replaceState({
+    code: newCode,
+    comment: newComment
+  }, code, "?code=" + encodeURIComponent(newCode));
+
+  updateCallback();
+}
+
+output.addEventListener('click', nextExample);
+
+window.onpopstate = function(event) {
+  readURL();
+  updateCallback();
+}

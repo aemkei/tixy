@@ -1,0 +1,14 @@
+{
+  "creative code golf by @aemkei": "Math.sin(y/8+t)",
+  "white": "1",
+  "red": "-1",
+  "white black red": "[1,0,-1][i%3]",
+  "triangle": "y-x",
+  "random": "Math.random()*2 - 1",
+  "noise": "Math.sin(i**2)",
+  "time": "t-x",
+  "count": "i-t*8",
+  "pattern": "i%4 - y%4",
+  "grid": "x%4 && y%4",
+  "animated noise": "Math.cos(t+i*x*y)"
+}
