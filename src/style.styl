@@ -1,35 +1,43 @@
 html
   background-color: black
   color: #FFF
+  height: 100%;
+
+*
   box-sizing: border-box
 
 html, *, input
   font-family: monospace
-  font-size: 16px
+  font-size: 14px
+
+body
+  padding: 0
+  margin: 0
+  display: grid
+  align-items: center;
+  justify-items: center;
+  height: 100%;
 
 label, input
-  text-align: center
   display: block
 
 #output
-  position: fixed
-  top: 30%
-  left: 50%
-  transform: translate(-50%, -50%)
+  display: block
 
 #editor
-  position: absolute
-  bottom: 2em
-  width: 100%
+  display: block
+  width: 272px;
+  line-height: 1.5em
+
+#comment
+  color: #F24
 
 #input
-  width: 100%
-  margin-top: 1em
-  padding: 0 1em
   background: none
   color: #FFF
   padding: 0
   border: 0
+  width: 100%
   &:focus
     outline: none
 

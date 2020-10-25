@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <meta name="viewport" content="width=400px, user-scalable=no" />
+    <meta name="viewport" content="width=400, user-scalable=no" />
     <meta name="theme-color" content="#000000" />
     <title>(t,i,x,y) => "creative code golfing"</title>
     <link rel="stylesheet" href="style.styl" inline="inline" />
@@ -10,8 +10,9 @@
     <canvas id="output"></canvas>
 
     <div id="editor">
-      <label for="input">(t,i,x,y) =></label>
-      <input id="input" type="text" value="Math.sin(y/8+t)" />
+      <label id="comment" for="input">// click animation to load more</label>
+      <label id="label" for="input">(t,i,x,y) =></label>
+      <input id="input" type="text" value="Math.sin(y/8+t)" maxlength="32" />
     </div>
 
     <iframe id="code-runner" sandbox="allow-same-origin"></iframe>
