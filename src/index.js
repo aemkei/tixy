@@ -124,7 +124,7 @@ function nextExample() {
   if (snippets[index + 1]) {
     index = index + 1;
   } else {
-    index = 0;
+    return;
   }
 
   const newCode = snippets[index];
