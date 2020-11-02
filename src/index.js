@@ -7,6 +7,7 @@ import examples from './examples.json';
 
 const runner = document.getElementById('code-runner').contentWindow;
 const input = document.getElementById('input');
+const editor = document.getElementById('editor');
 const comment = document.getElementById('comment');
 const output = document.getElementById('output');
 const context = output.getContext('2d');
@@ -63,10 +64,17 @@ function updateCallback() {
 updateCallback();
 input.addEventListener('input', updateCallback);
 
-input.addEventListener('keypress', (event) => {
-  if ((event.code === 'Enter')) {
-    history.replaceState(null, code, `?code=${encodeURIComponent(code)}`);
-  }
+input.addEventListener('focus', function() {
+  updateComments(['hit "enter" to save in URL', 'or get <a href="https://twitter.com/aemkei/status/1323399877611708416" target="_blank">more info here</a>']);
+});
+
+input.addEventListener('blur', updateCommentsForCode);
+
+editor.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const url = new URL(document.location);
+  url.searchParams.set('code', code);
+  history.replaceState(null, code, url);
 });
 
 function render() {
@@ -115,8 +123,31 @@ function render() {
 
 render();
 
-function nextExample() {
+function updateComments(comments) {
+  const lines = comment.querySelectorAll('label');
+
+  if (comments.length === 1) {
+    lines[0].innerHTML = '&nbsp;';
+    lines[1].innerHTML = `// ${comments[0]}`;
+  } else {
+    lines[0].innerHTML = `// ${comments[0]}`;
+    lines[1].innerHTML = `// ${comments[1]}`;
+  }
+}
+
+function updateCommentsForCode() {
+
+  const code = input.value;
+
+  const snippets = Object.values(examples);
   const comments = Object.keys(examples);
+  const index = snippets.indexOf(code);
+  const newComments = comments[index].split('\n');
+
+  updateComments(newComments);
+}
+
+function nextExample() {
   const snippets = Object.values(examples);
 
   let index = snippets.indexOf(code);
@@ -128,19 +159,10 @@ function nextExample() {
   }
 
   const newCode = snippets[index];
-  const newComment = comments[index].split('\n');
-
-  const lines = comment.querySelectorAll('label');
-
-  if (newComment.length === 1) {
-    lines[0].innerHTML = '&nbsp;';
-    lines[1].innerText = `// ${newComment[0]}`;
-  } else {
-    lines[0].innerText = `// ${newComment[0]}`;
-    lines[1].innerText = `// ${newComment[1]}`;
-  }
-
   input.value = newCode;
+
+  updateCommentsForCode();
+
   // history.replaceState({
   //   code: newCode,
   //   comment: newComment
@@ -155,3 +177,6 @@ window.onpopstate = function(event) {
   readURL();
   updateCallback();
 };
+
+
+updateCommentsForCode();
