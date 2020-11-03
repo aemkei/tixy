@@ -1,49 +1,43 @@
 html
-  background-color: black
-  color: #FFF
-  height: 100%;
+  margin: 0
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  height: 90%
+  background: #000
+  color: #fff
 
 *
-  box-sizing: border-box
+  font-size: 2vmin
+  font-family: monospace
+  line-height: 2vmin
 
 a:link, a:visited
   color: #F24
 
-html, *, input
-  font-family: monospace
-  font-size: 14px
-
 body
+  margin: 0
+  width: 64vmin
+  height: 76vmin
+
+canvas, form, input, label
   padding: 0
   margin: 0
-  display: grid
-  align-items: center;
-  justify-items: center;
-  height: 100%;
-
-label, input
   display: block
-
-#output
-  display: block
-
-#editor
-  display: block
-  width: 272px;
-  line-height: 1.15em
-
-#comment
-  color: #F24
-
-#input
-  background: none
-  color: #FFF
-  padding: 0
-  margin: 0.15em 0
-  border: 0
-  width: 100%
+  background: transparent
+  width: 64vmin
+  color: inherit
+  border: none
   &:focus
     outline: none
+
+#output
+  height: 64vmin
+  margin-bottom: 4vmin
+
+#comment *
+  color: #F24
 
 #code-runner
   display: none
