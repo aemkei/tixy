@@ -65,6 +65,7 @@ updateCallback();
 input.addEventListener('input', updateCallback);
 
 input.addEventListener('focus', function() {
+  initAudio();
   updateComments(['hit "enter" to save in URL', 'or get <a href="https://twitter.com/aemkei/status/1323399877611708416" target="_blank">more info here</a>']);
 });
 
@@ -114,11 +115,25 @@ function render() {
         0,
         2 * Math.PI
       );
+      if (context.audioBuffer) {
+      context.audioBuffer[index-1] = radius / size / 8;
+      }
       context.fill();
     }
   }
 
   window.requestAnimationFrame(render);
+}
+
+function initAudio() {
+  if (!context.audioBuffer) {
+    const audioContext = new AudioContext;
+    const bufferSource = audioContext.createBufferSource();
+    context.audioBuffer = (bufferSource.buffer = audioContext.createBuffer(1, 256, 15360)).getChannelData(0);
+    bufferSource.connect(audioContext.destination);
+    bufferSource.start();
+    bufferSource.loop=true;
+  }
 }
 
 render();
@@ -149,7 +164,6 @@ function updateCommentsForCode() {
 
 function nextExample() {
   const snippets = Object.values(examples);
-
   let index = snippets.indexOf(code);
 
   if (snippets[index + 1]) {
@@ -168,6 +182,7 @@ function nextExample() {
   //   comment: newComment
   // }, code, `?code=${encodeURIComponent(newCode)}`);
 
+  initAudio();
   updateCallback();
 }
 
