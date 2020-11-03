@@ -68,7 +68,7 @@ input.addEventListener('input', updateCallback);
 input.addEventListener('focus', function () {
   updateComments([
     'hit "enter" to save in URL',
-    'or get <a href="https://twitter.com/aemkei/status/1323399877611708416" target="_blank">more info here</a>'
+    'or get <a href="https://twitter.com/aemkei/status/1323399877611708416">more info here</a>'
   ]);
 });
 
