@@ -50,7 +50,9 @@ function updateCallback() {
     callback = runner.eval(`
       (function f(t,i,x,y) {
         try {
-          return ${code.replace(/\\/g, ';')};
+          with (Math) {
+            return ${code.replace(/\\/g, ';')};
+          }
         } catch (error) {
           return error;
         }
