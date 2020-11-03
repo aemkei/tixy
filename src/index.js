@@ -12,7 +12,7 @@ const comment = document.getElementById('comment');
 const output = document.getElementById('output');
 const context = output.getContext('2d');
 
-let callback = function() {};
+let callback = function () {};
 let startTime = new Date();
 let code = '';
 
@@ -22,7 +22,6 @@ const cells = [];
 
 for (let y = 0, index = 0; y < count; y++) {
   for (let x = 0; x < count; x++) {
-
     cells.push({
       index,
       x,
@@ -66,8 +65,11 @@ function updateCallback() {
 updateCallback();
 input.addEventListener('input', updateCallback);
 
-input.addEventListener('focus', function() {
-  updateComments(['hit "enter" to save in URL', 'or get <a href="https://twitter.com/aemkei/status/1323399877611708416" target="_blank">more info here</a>']);
+input.addEventListener('focus', function () {
+  updateComments([
+    'hit "enter" to save in URL',
+    'or get <a href="https://twitter.com/aemkei/status/1323399877611708416" target="_blank">more info here</a>'
+  ]);
 });
 
 input.addEventListener('blur', updateCommentsForCode);
@@ -138,7 +140,6 @@ function updateComments(comments) {
 }
 
 function updateCommentsForCode() {
-
   const code = input.value;
 
   const snippets = Object.values(examples);
@@ -181,10 +182,9 @@ function nextExample() {
 
 output.addEventListener('click', nextExample);
 
-window.onpopstate = function(event) {
+window.onpopstate = function (event) {
   readURL();
   updateCallback();
 };
-
 
 updateCommentsForCode();
