@@ -144,7 +144,13 @@ function updateCommentsForCode() {
   const snippets = Object.values(examples);
   const comments = Object.keys(examples);
   const index = snippets.indexOf(code);
-  const newComments = comments[index].split('\n');
+  const newComment = comments[index];
+
+  if (!newComment) {
+    return;
+  }
+
+  const newComments = newComment.split('\n');
 
   updateComments(newComments);
 }
