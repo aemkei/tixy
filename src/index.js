@@ -11,12 +11,15 @@ const editor = document.getElementById('editor');
 const comment = document.getElementById('comment');
 const output = document.getElementById('output');
 const context = output.getContext('2d');
+const dpr = window.devicePixelRatio || 1;
 
 let callback = function () {};
 let startTime = new Date();
 let code = '';
 
-output.width = output.height = width;
+output.width = output.height = width * dpr;
+context.scale(dpr,dpr);
+output.style.width = output.style.height = `${width}px`;
 
 const cells = [];
 
@@ -89,7 +92,8 @@ function render() {
     return;
   }
 
-  output.width = output.height = width;
+  output.width = output.height = width * dpr;
+  context.scale(dpr,dpr)
   let index = 0;
   for (let y = 0; y < count; y++) {
     for (let x = 0; x < count; x++) {
