@@ -20,8 +20,8 @@ output.width = output.height = width;
 
 const cells = [];
 
-for (let y = 0, index = 0; y < count; y++) {
-  for (let x = 0; x < count; x++) {
+for (let y = 1, index = 0; y <= count; y++) {
+  for (let x = 1; x <= count; x++) {
     cells.push({
       index,
       x,
@@ -91,8 +91,8 @@ function render() {
 
   output.width = output.height = width;
   let index = 0;
-  for (let y = 1; y <= count; y++) {
-    for (let x = 1; x <= count; x++) {
+  for (let y = 0; y < count; y++) {
+    for (let x = 0; x < count; x++) {
       index++;
 
       const value = callback(time, index, x, y);
