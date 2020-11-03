@@ -116,7 +116,7 @@ function render() {
         2 * Math.PI
       );
       if (context.audioBuffer) {
-      context.audioBuffer[index-1] = radius / size / 8;
+        context.audioBuffer[index-1] = radius / size / 8;
       }
       context.fill();
     }
