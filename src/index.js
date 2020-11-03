@@ -22,13 +22,13 @@ const cells = [];
 
 for (let y = 0, index = 0; y < count; y++) {
   for (let x = 0; x < count; x++) {
-    index++;
 
     cells.push({
       index,
       x,
       y
     });
+    index++;
   }
 }
 
