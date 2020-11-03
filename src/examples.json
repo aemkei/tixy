@@ -1,6 +1,6 @@
 {
-  "return the visibility\nfor every dot (true|false)": "Math.random() < 0.1",
-  "the radius can also be \nbetween 0 and 1": "Math.random()",
+  "for every dot return 0 or 1 \nto change the visibility": "Math.random() < 0.1",
+  "use a float between 0 and 1\n to define the size": "Math.random()",
   "parameter `t` is \nthe time in seconds": "Math.sin(t)",
   "param `i` is the index \nof the dot (0..255)": "i / 256",
   "`x` is the column index\n from 1 to 16": "x / 16",
@@ -9,6 +9,7 @@
   "use the time\nto animate values": "y - t",
   "multiply the time\nto change the speed": "y - t*4",
   "create patterns using \ndifferent color": "[1, 0, -1][i%3]",
+  "skip `Math.` to use methods \nand props like `sin` or `PI`": "sin(t-sqrt((x-8.5)**2+(y-6)**2))",
   "more examples ...": "Math.sin(y/8 + t)",
   "simple triangle": "y - x",
   "quarter triangle": "(y > x) && (16-x < y)",
