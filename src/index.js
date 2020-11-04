@@ -18,7 +18,7 @@ let startTime = new Date();
 let code = '';
 
 output.width = output.height = width * dpr;
-context.scale(dpr,dpr);
+context.scale(dpr, dpr);
 output.style.width = output.style.height = `${width}px`;
 
 function readURL() {
@@ -80,12 +80,10 @@ function render() {
   }
 
   output.width = output.height = width * dpr;
-  context.scale(dpr,dpr)
+  context.scale(dpr, dpr);
   let index = 0;
   for (let y = 0; y < count; y++) {
     for (let x = 0; x < count; x++) {
-      index++;
-
       const value = callback(time, index, x, y);
       const offset = size / 2;
       let color = '#FFF';
@@ -103,13 +101,14 @@ function render() {
       context.beginPath();
       context.fillStyle = color;
       context.arc(
-        x * (size + spacing) - offset,
-        y * (size + spacing) - offset,
+        x * (size + spacing) + offset,
+        y * (size + spacing) + offset,
         radius,
         0,
         2 * Math.PI
       );
       context.fill();
+      index++;
     }
   }
 
