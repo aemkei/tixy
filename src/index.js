@@ -21,19 +21,6 @@ output.width = output.height = width * dpr;
 context.scale(dpr,dpr);
 output.style.width = output.style.height = `${width}px`;
 
-const cells = [];
-
-for (let y = 1, index = 0; y <= count; y++) {
-  for (let x = 1; x <= count; x++) {
-    cells.push({
-      index,
-      x,
-      y
-    });
-    index++;
-  }
-}
-
 function readURL() {
   const url = new URL(document.location);
 
