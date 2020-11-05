@@ -29,6 +29,7 @@
   "bloop bloop bloop\nby @v21": "(x-8)*(y-8) - sin(t)*64",
   "starfield\nby @P_Malin": "d=y*y%5.9+1,!((x+t*50/d)&15)/d",
   "diagonals": "y == x || -(17-x == y)",
+  "frame": "x==0 | x==15 | y==0 | y==15",
   "rotation": "sin(PI*2*atan((y-8)/(x-8))+5*t)",
   "wipe": "(x-y) - sin(t) * 16",
   "soft wipe": "(x-y)/24 - sin(t)",
