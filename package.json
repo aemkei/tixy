@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel ./src/index.html --open",
     "clean": "rm dist/*.*",
-    "build": "parcel build ./src/index.html ./src/twitter-card.png",
+    "build": "parcel build ./src/index.html ./src/assets/twitter-card.png",
     "firebase": "firebase deploy --only hosting",
     "deploy": "npm run clean && npm run build && npm run firebase"
   },
@@ -19,7 +19,5 @@
     "stylus": "^0.54.8"
   },
   "dependencies": {
-    "canvas": "^2.6.1",
-    "two.js": "^0.7.0-stable.1"
   }
 }
