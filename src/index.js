@@ -14,7 +14,7 @@ const context = output.getContext('2d');
 const dpr = window.devicePixelRatio || 1;
 
 let callback = function () {};
-let startTime = new Date();
+let startTime = null;
 let code = '';
 
 output.width = output.height = width * dpr;
@@ -33,7 +33,7 @@ readURL();
 
 function updateCallback() {
   code = input.value;
-  startTime = new Date();
+  startTime = null;
 
   try {
     callback = runner.eval(`
@@ -72,7 +72,13 @@ editor.addEventListener('submit', (event) => {
 });
 
 function render(lastValues) {
-  const time = (new Date() - startTime) / 1000;
+  let time = 0;
+
+  if (startTime) {
+    time = (new Date() - startTime) / 1000;
+  } else {
+    startTime = new Date();
+  }
 
   if (!callback) {
     window.requestAnimationFrame(() => render(lastValues));
