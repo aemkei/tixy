@@ -37,7 +37,7 @@ function updateCallback() {
 
   try {
     callback = runner.eval(`
-      (function f(t,i,x,y) {
+      (function f(t,i,x,y,l) {
         try {
           with (Math) {
             return ${code.replace(/\\/g, ';')};
@@ -71,7 +71,7 @@ editor.addEventListener('submit', (event) => {
   history.replaceState(null, code, url);
 });
 
-function render() {
+function render(lastValues) {
   let time = 0;
 
   if (startTime) {
@@ -81,16 +81,17 @@ function render() {
   }
 
   if (!callback) {
-    window.requestAnimationFrame(render);
+    window.requestAnimationFrame(() => render(lastValues));
     return;
   }
 
   output.width = output.height = width * dpr;
   context.scale(dpr, dpr);
   let index = 0;
+
   for (let y = 0; y < count; y++) {
     for (let x = 0; x < count; x++) {
-      const value = callback(time, index, x, y);
+      const value = callback(time, index, x, y, lastValues[index]);
       const offset = size / 2;
       let color = '#FFF';
       let radius = (value * size) / 2;
@@ -114,14 +115,21 @@ function render() {
         2 * Math.PI
       );
       context.fill();
+      lastValues[index] = isNaN(value) ? 0 : value;
       index++;
     }
   }
 
-  window.requestAnimationFrame(render);
+  window.requestAnimationFrame(() => render(lastValues));
 }
 
-render();
+let lastValues = new Array(256);
+
+for (let i = 0; i < 256; i++) {
+    lastValues[i] = 0;
+}
+
+render(lastValues);
 
 function updateComments(comments) {
   const lines = comment.querySelectorAll('label');
@@ -167,11 +175,6 @@ function nextExample() {
   input.value = newCode;
 
   updateCommentsForCode();
-
-  // history.replaceState({
-  //   code: newCode,
-  //   comment: newComment
-  // }, code, `?code=${encodeURIComponent(newCode)}`);
 
   updateCallback();
 }
