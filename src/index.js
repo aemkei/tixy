@@ -13,7 +13,7 @@ const output = document.getElementById('output');
 const context = output.getContext('2d');
 const dpr = window.devicePixelRatio || 1;
 
-let callback = function () {};
+let callback = function () { };
 let startTime = null;
 let code = '';
 
@@ -43,6 +43,8 @@ function updateCallback() {
   code = input.value;
   startTime = null;
 
+  checkLength();
+
   try {
     callback = runner.eval(`
       (function f(t,i,x,y) {
@@ -60,21 +62,21 @@ function updateCallback() {
   }
 }
 
+input.addEventListener('input', updateCallback);
 updateCallback();
-input.addEventListener('input', function() {
-  updateCallback();
-  checkLength();
-});
 
 input.addEventListener('focus', function () {
+  editor.classList.add('focus');
   updateComments([
     'hit "enter" to save in URL',
     'or get <a href="https://twitter.com/aemkei/status/1323399877611708416">more info here</a>'
   ]);
-  checkLength();
 });
 
-input.addEventListener('blur', updateCommentsForCode);
+input.addEventListener('blur', function () {
+  updateCommentsForCode();
+  editor.classList.remove('focus');
+});
 
 editor.addEventListener('submit', (event) => {
   event.preventDefault();
