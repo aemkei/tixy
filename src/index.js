@@ -31,6 +31,14 @@ function readURL() {
 
 readURL();
 
+function checkLength() {
+  if (code.length > 32) {
+    editor.classList.add('over-limit');
+  } else {
+    editor.classList.remove('over-limit');
+  }
+}
+
 function updateCallback() {
   code = input.value;
   startTime = null;
@@ -53,13 +61,17 @@ function updateCallback() {
 }
 
 updateCallback();
-input.addEventListener('input', updateCallback);
+input.addEventListener('input', function() {
+  updateCallback();
+  checkLength();
+});
 
 input.addEventListener('focus', function () {
   updateComments([
     'hit "enter" to save in URL',
     'or get <a href="https://twitter.com/aemkei/status/1323399877611708416">more info here</a>'
   ]);
+  checkLength();
 });
 
 input.addEventListener('blur', updateCommentsForCode);

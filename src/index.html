@@ -23,12 +23,13 @@
 
     <form id="editor">
       <div id="comment">
-        <label for="input">// tixy - creative code golfing</label>
-        <label for="input">// click the dots for more info</label>
+        <label class="first" for="input">// tixy - creative code golfing</label>
+        <label class="second" for="input">// click the dots for more info</label>
+        <label class="limit-warning" for="input">// use 32 characters or less</label>
       </div>
 
       <label id="label" for="input">(t,i,x,y) =></label>
-      <input name="code" id="input" type="text" value="Math.sin(y/8+t)" autocomplete="off" autocapitalize="off" spellcheck="false" autocorrect="off" maxlength="32" />
+      <input name="code" id="input" type="text" value="Math.sin(y/8+t)" autocomplete="off" autocapitalize="off" spellcheck="false" autocorrect="off" />
     </div>
 
     <iframe id="code-runner" sandbox="allow-same-origin"></iframe>
