@@ -1,7 +1,7 @@
 const count = 16;
 const size = 16;
 const spacing = 1;
-const width = count * (size + spacing);
+const width = count * (size + spacing) - spacing;
 
 import examples from './examples.json';
 
