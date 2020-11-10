@@ -8,9 +8,18 @@
     ],
     "rewrites": [
       {
+        "source": "/image",
+        "function": "image"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
+    ]
+  },
+  "functions": {
+    "predeploy": [
+
     ]
   }
 }

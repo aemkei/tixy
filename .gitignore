@@ -2,3 +2,4 @@ node_modules/
 .cache/
 dist/
 .firebase/
+firebase-debug.log

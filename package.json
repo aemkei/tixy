@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel ./src/index.html --open",
-    "clean": "rm dist/*.*",
+    "clean": "rm -Rf dist/",
     "build": "parcel build ./src/index.html ./src/assets/twitter-card.png",
     "firebase": "firebase deploy --only hosting",
     "deploy": "npm run clean && npm run build && npm run firebase"
