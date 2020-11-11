@@ -1,0 +1,62 @@
+html
+  background-color: black
+  color: #FFF
+  height: 100%
+
+*
+  box-sizing: border-box
+
+a:link, a:visited
+  color: #F24
+
+html, *, input
+  font-family: monospace
+  font-size: 14px
+
+body
+  padding: 0
+  margin: 0
+  display: grid
+  align-items: center
+  justify-items: center
+  height: 100%
+
+label, input
+  display: block
+
+#output
+  width: 400px
+
+#code-runner
+  display: none
+
+#editor
+  display: block
+  width: 271px
+  line-height: 1.15em
+  #input, #duration
+    background: none
+    color: #FFF
+    padding: 0
+    margin: 0.15em 0
+    border: 0
+    width: 100%
+    &:focus
+      outline: none
+  label
+    &.comment
+      color: #F24
+  button
+    margin-top: 0.5em
+
+#editor.over-limit
+  #input
+    background: #F24
+    color: #FFF
+
+#editor.over-limit.focus
+  label
+    &.limit-warning
+      display: block
+    &.second
+      display: none

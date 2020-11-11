@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>(t,i,x,y) => "Gif Maker"</title>
+  <link rel="stylesheet" href="style.styl" inline="inline" />
+</head>
+
+<body>
+  <canvas id="output"></canvas>
+
+  <form id="editor">
+    <label class="comment" for="input">// tixy gif generator</label>
+    <input name="code" id="input" type="text" value="Math.sin(y/8+t)" autocomplete="off" autocapitalize="off"
+    spellcheck="false" autocorrect="off" />
+
+    <label class="comment" for="duration">// duration (s)</label>
+    <input name="duration" id="duration" type="number" value="4" step="0.02" autocomplete="off" autocapitalize="off"
+      spellcheck="false" autocorrect="off" />
+    <button type="submit">create gif</button>
+  </form>
+
+  <script id="worker" src="gif.worker.js"></script>
+  <script src="index.js" inline="inline"></script>
+</body>
+
+</html>
