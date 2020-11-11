@@ -5,7 +5,6 @@ const width = count * (size + spacing) - spacing;
 
 import examples from './examples.json';
 
-const runner = document.getElementById('code-runner').contentWindow;
 const input = document.getElementById('input');
 const editor = document.getElementById('editor');
 const comment = document.getElementById('comment');
@@ -46,16 +45,14 @@ function updateCallback() {
   checkLength();
 
   try {
-    callback = runner.eval(`
-      (function f(t,i,x,y) {
-        try {
-          with (Math) {
-            return ${code.replace(/\\/g, ';')};
-          }
-        } catch (error) {
-          return error;
+    callback = new Function('t', 'i', 'x', 'y', `
+      try {
+        with (Math) {
+          return ${code.replace(/\\/g, ';')};
         }
-      })
+      } catch (error) {
+        return error;
+      }
     `);
   } catch (error) {
     callback = null;
