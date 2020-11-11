@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel ./src/index.html --open",
+    "gif": "parcel ./src/gif/index.html --open --port 1337",
     "clean": "rm -Rf dist/",
-    "build": "parcel build ./src/index.html ./src/assets/twitter-card.png",
+    "build": "parcel build ./src/index.html ./src/gif/index.html ./src/assets/twitter-card.png",
     "firebase": "firebase deploy --only hosting",
     "deploy": "npm run clean && npm run build && npm run firebase"
   },
