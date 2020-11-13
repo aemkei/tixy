@@ -33,7 +33,7 @@
   "sticky blood\nby @joeytwiddle": "y-t*3+9+3*cos(x*3-t)-5*sin(x*7)",
   "3d starfield\nby @p_malin": "d=y*y%5.9+1,!((x+t*50/d)&15)/d",
   "dialogue with an alien\nby @chiptune": "1/32*tan(t/64*x*tan(i-x))",
-  "space invader\nby @keithclarkcouk and @zozuar": "'p}¶¼<¼¶}p'.charCodeAt(x)&2**y",
+  "space invader\nby @keithclarkcouk + @zozuar": "'p}¶¼<¼¶}p'.charCodeAt(x)&2**y",
   "hungry pac man\nby @p_malin and @aemkei": "hypot(x-=t%4*5,y-=8)<6&&x<y|y<-x",
   "spectrum analyser\nby @joeytwiddle": "x&y<9&y>4+sin(8*t+x*x)+x/4",
   "diagonals": "y == x || -(15-x == y)",
