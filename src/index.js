@@ -101,7 +101,7 @@ function render() {
   let index = 0;
   for (let y = 0; y < count; y++) {
     for (let x = 0; x < count; x++) {
-      const value = callback(time, index, x, y);
+      const value = Number(callback(time, index, x, y));
       const offset = size / 2;
       let color = '#FFF';
       let radius = (value * size) / 2;
