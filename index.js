@@ -1,4 +1,5 @@
-// const characters = '.,:;i1tfLCG08@';
+#!/usr/bin/env node
+
 const characters = ' -=oO0@';
 const emptyLine = ' '.repeat(16 * 2 + 1);
 
