@@ -3,7 +3,7 @@
 const characters = ' -=oO0@';
 const emptyLine = ' '.repeat(16 * 2 + 1);
 
-code = process.argv[2] || 'cos(t+i+x*y)';
+code = process.argv[2] || 'sin(t-sqrt((x-7.5)**2+(y-6)**2))';
 
 console.clear();
 let output = '';
