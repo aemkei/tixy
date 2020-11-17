@@ -68,5 +68,3 @@ module.exports = function() {
 
   render();
 }
-
-module.exports();
