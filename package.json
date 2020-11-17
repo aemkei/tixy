@@ -20,5 +20,7 @@
     "stylus": "^0.54.8"
   },
   "dependencies": {
+    "gif.js.optimized": "^1.0.1",
+    "pureimage": "^0.2.5"
   }
 }
