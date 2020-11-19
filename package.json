@@ -1,12 +1,13 @@
 {
   "name": "tixy-land",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "(t,i,x,y) => 'creative code golfing",
   "main": "index.js",
   "bin": "index.js",
   "scripts": {
     "start": "parcel ./src/index.html --open",
-    "gif": "parcel ./src/gif/index.html --open --port 1337",
+    "gif": "parcel ./src/gif/index.html --open --port 1235",
+    "gallery": "parcel ./src/gallery/index.html --open --port 1236",
     "clean": "rm -Rf dist/",
     "build": "parcel build ./src/index.html ./src/gif/index.html ./src/assets/twitter-card.png",
     "firebase": "firebase deploy --only hosting",
