@@ -1,10 +1,6 @@
-
-import examples from '../examples.json';
+import s from './snippets.txt';
 
 const output = document.getElementById('output');
-const snippets = Object.values(examples);
-const comments = Object.keys(examples);
-
 const count = 16;
 const size = 8;
 const spacing = 1;
@@ -47,58 +43,66 @@ function render(callback, time, context){
   }
 }
 
+fetch(s)
+  .then(response => response.text())
+  .then(text => {
 
-snippets.forEach(snippet => {
+    const lines = text.split('\n')
+      .filter(line => line !== '')
+      .filter(line => line.indexOf('//'));
 
-  const canvas = document.createElement('canvas');
-  const context = canvas.getContext('2d');
+    lines.forEach(snippet => {
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
 
-  output.appendChild(canvas);
-  canvas.width = width;
-  canvas.height = width;
+      output.appendChild(canvas);
+      canvas.width = width;
+      canvas.height = width;
 
-  const callback  = new Function('t', 'i', 'x', 'y', `
-    with (Math) {
-      return ${snippet};
-    }
-  `);
+      const callback  = new Function('t', 'i', 'x', 'y', `
+        with (Math) {
+          return ${snippet};
+        }
+      `);
 
-  const defaultTime = 5.2;
+      const defaultTime = 6.5;
 
-  render(callback, defaultTime, context);
+      render(callback, defaultTime, context);
 
-  let time;
-  let startTime;
-  let active = false;
+      let time;
+      let startTime;
+      let active = false;
 
-  function loop() {
-    setTimeout(loop, 1);
+      function loop() {
+        setTimeout(loop, 1);
 
-    if (!active) {
-      return;
-    }
+        if (!active) {
+          return;
+        }
 
-    if (!startTime) {
-      startTime = new Date();
-      time = 0;
-    } else {
-      time = (new Date() - startTime) / 1000;
-    }
+        if (!startTime) {
+          startTime = new Date();
+          time = 0;
+        } else {
+          time = (new Date() - startTime) / 1000;
+        }
 
-    render(callback, time, context);
-  }
+        render(callback, time, context);
+      }
 
-  loop();
+      loop();
 
-  canvas.addEventListener('mouseover', function(){
-    startTime = null;
-    active = true;
+      canvas.addEventListener('mouseover', function(){
+        startTime = null;
+        active = true;
+      });
+
+      canvas.addEventListener('mouseout', function(){
+        active = false;
+        startTime = null;
+        render(callback, defaultTime, context);
+      });
+
+    });
   });
 
-  canvas.addEventListener('mouseout', function(){
-    active = false;
-    startTime = null;
-    render(callback, defaultTime, context);
-  });
-
-});

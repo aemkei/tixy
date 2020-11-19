@@ -1,0 +1,101 @@
+// sin cos sin cos sin cos
+// by @inky
+((x^y)%2?sin:cos)(t)
+
+// fan
+// by @akella and @aemkei
+sin(3*atan2(y-7.5,x-7.5)+t)
+
+// sticky blood
+// by @joeytwiddle
+y-t*3+9+3*cos(x*3-t)-5*sin(x*7)
+
+// fireworks
+// by  @p_malin and @aemkei
+-.4 /(hypot(x-t%10,y-t%8)-t%2*9)
+
+// dialogue with an alien form of life
+// by @chiptune
+1/32*tan(t/64*x*tan(i-x))
+
+// maze generator
+// by @xordev
+1-(sin((x&28+y&12)+t)>0?y:x)%4
+
+// ripples
+sin(t-hypot(x-7.5,y-6))
+
+// sunset
+// by @jahndis
+4/((x-t*0.7)**2+(y-t)**2)-y/t/2
+
+// flames
+// by @2DArray
+min(10-y+sin(x+sin(y+t*4))*5,0)
+
+// rotating rod
+// by @maettig
+1-abs((x-6)*cos(t)+(y-6)*sin(t))
+
+// stargate
+// by @sam_suite
+sin(t+((x-7.5)**2+(y-7.5)**2)/4)
+
+// fractal
+// by @lukiss163
+(x^y)-i/t**1.8
+
+// bouncy ball
+// by @zozuar
+-hypot(x-t%6*3,(t*5%8-4)**2-y)+2
+
+// four in one
+// by @mgmalheiros
+[z=t-x,tan(y-z),-z/y,y-x%t][t&3]
+
+// tunnel
+// by @xordev
+tan(-y/max(x-8,y-8,7-x,7-y)-t*4)
+
+// growing cells
+// by @bitnenfer
+sin(-t/hypot(x-7.5,y-7.5))
+
+// us flag
+x>6|y>5?y<12&&sin(y+t+i*6):.3
+
+// scrolling "TIXY" font
+// by @atesgoral
+[5463,2194,2386][y+t*9&7]&1<<x-1
+
+// matrix rain
+// by @P_Malin
+1-((x*x-y+t*(1+x*x%5)*3)%16)/16
+
+// checker board
+// by @P_Malin
+(((x-8)/y+t*5)&1^1/y*8&1)*y/5
+
+// fun with the & operator
+// by @v21
+(x+(t*10)/16)&y+(t*10)
+
+// 3d starfield
+// by @P_Malin
+d=y*y%5.9+1,!((x+t*50/d)&15)/d
+
+// space invader
+// by @keithclarkcouk and @zozuar
+'p}¶¼<¼¶}p'.charCodeAt(x)&2**y
+
+// hungry pac man
+// by @p_malin and @aemkei
+hypot(x-=t%2*9,y-=8)<6&&x<y|y<-x
+
+// spectrum analyser
+// by @joeytwiddle
+x&y<9&y>4+sin(8*t+x*x)+x/4
+
+// duo
+// by @cocopon
+([62,85,93,62][y/2]||65)>>x%9&1

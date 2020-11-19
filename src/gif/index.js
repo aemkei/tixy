@@ -10,7 +10,6 @@ import GIF from "gif.js.optimized";
 const workerScript = document.getElementById('worker').src;
 
 const $output = document.getElementById('output');
-const $info = document.getElementById('info');
 const $editor = document.getElementById('editor');
 const $input = document.getElementById('input');
 const $duration = document.getElementById('duration');
