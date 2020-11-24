@@ -61,7 +61,7 @@ fetch(s)
 
       link.appendChild(canvas);
       link.classList.add('canvas');
-      link.setAttribute('href', `/?code=${code}`);
+      link.setAttribute('href', url);
 
 
       output.appendChild(link);
