@@ -61,6 +61,18 @@ tan(-y/max(x-8,y-8,7-x,7-y)-t*4)
 // by @bitnenfer
 sin(-t/hypot(x-7.5,y-7.5))
 
+// roto zoomer
+// by @mzarcus
+a=tan(t),((t*9+x-y*a^x*a+y)&8)-4
+
+// blob
+// by @maettig
+6-hypot(x-7.5,y-7.5)-sin(i/3-t)
+
+// stage blinders
+// by @ntsutae
+.025/sin(t+(x^y|t))
+
 // us flag
 x>6|y>5?y<12&&sin(y+t+i*6):.3
 
@@ -99,3 +111,7 @@ x&y<9&y>4+sin(8*t+x*x)+x/4
 // duo
 // by @cocopon
 ([62,85,93,62][y/2]||65)>>x%9&1
+
+// train ride
+// by @ntsutae
+t/y<(x+=t*24,(y+x^y-x)%29+y*2)

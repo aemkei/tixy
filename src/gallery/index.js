@@ -4,7 +4,7 @@ const output = document.getElementById('output');
 const count = 16;
 const size = 8;
 const spacing = 1;
-const width = count * (size + spacing) - spacing;
+const width = count * (size + spacing) - 2 * spacing;
 
 function render(callback, time, context){
   let index = 0;
@@ -51,17 +51,26 @@ fetch(s)
       .filter(line => line !== '')
       .filter(line => line.indexOf('//'));
 
-    lines.forEach(snippet => {
+    lines.forEach(code => {
+      const link = document.createElement('a');
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d');
 
-      output.appendChild(canvas);
+      const url = new URL('/', document.location);
+      url.searchParams.set('code', code);
+
+      link.appendChild(canvas);
+      link.classList.add('canvas');
+      link.setAttribute('href', `/?code=${code}`);
+
+
+      output.appendChild(link);
       canvas.width = width;
       canvas.height = width;
 
       const callback  = new Function('t', 'i', 'x', 'y', `
         with (Math) {
-          return ${snippet};
+          return ${code};
         }
       `);
 
@@ -74,7 +83,7 @@ fetch(s)
       let active = false;
 
       function loop() {
-        setTimeout(loop, 1);
+        setTimeout(loop, 10);
 
         if (!active) {
           return;
@@ -92,16 +101,36 @@ fetch(s)
 
       loop();
 
-      canvas.addEventListener('mouseover', function(){
+      function start(){
         startTime = null;
         active = true;
-      });
+        canvas.classList.add('active');
+      }
 
-      canvas.addEventListener('mouseout', function(){
+      function stop(){
         active = false;
         startTime = null;
         render(callback, defaultTime, context);
-      });
+        canvas.classList.remove('active');
+      }
+
+      if ('ontouchstart' in document.documentElement) {
+        link.addEventListener('click', (event)=> {
+          if (!active) {
+            event.stopPropagation();
+            event.preventDefault();
+            start();
+          } else {
+            document.location = url;
+          }
+        })
+      } else {
+        canvas.addEventListener('mouseover', start);
+      }
+
+
+
+      canvas.addEventListener('mouseout', stop);
 
     });
   });

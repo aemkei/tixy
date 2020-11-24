@@ -1,5 +1,39 @@
 body
   background: black
 
-canvas
-  margin: 16px
+#output
+  max-width: 800px
+  display: grid
+  margin: auto
+  justify-content: center
+  grid-gap: 32px
+  padding: 16px
+  grid-template-columns: repeat(auto-fit, minmax(142px, 142px));
+
+  #title
+    grid-column: 1 / -1
+    color: #F24
+    grid-gap: 0px
+    h1 a
+      color: #FFF
+      text-decoration: none
+      :hover
+        text-decoration: underline
+    h2
+      color: #F24
+    h1, h2
+      font-size: 14px
+      font-family: monospace
+      font-weight: normal
+      margin: 0
+
+  a.canvas
+    display: flex
+    -webkit-tap-highlight-color: #F24;
+    canvas
+      display flex
+      filter: grayscale(100%);
+      opacity: 0.7
+      &:hover, &.active
+        filter: none
+        opacity: 1
