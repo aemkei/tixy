@@ -104,9 +104,6 @@ function run(){
   const t = new Date();
 
   gif.on('finished', function(blob) {
-    console.log("…");
-    console.log(new Date() - t);
-
 
     const link = document.createElement("a");
     link.download='tixy.gif';
