@@ -47,7 +47,7 @@ function run(){
   const callback = new Function('t', 'i', 'x', 'y', `
     try {
       with (Math) {
-        return ${code.replace(/\\/g, ';')};
+        return ${code};
       }
     } catch (error) {
       return error;
