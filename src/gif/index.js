@@ -96,9 +96,9 @@ function run(){
     gif.addFrame(context, {copy: true, delay: 20});
   }
 
-  while (time < duration) {
-    time += 1 / 50;
+  while (time <= duration) {
     render();
+    time += 1 / 50;
   }
 
   const t = new Date();
