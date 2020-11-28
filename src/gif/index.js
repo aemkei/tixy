@@ -109,7 +109,7 @@ function run(){
 
 
     const link = document.createElement("a");
-    link.download='tify.gif';
+    link.download='tixy.gif';
     link.href=URL.createObjectURL(blob);
     link.click();
 
