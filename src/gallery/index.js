@@ -2,9 +2,9 @@ import s from './snippets.txt';
 
 const output = document.getElementById('output');
 const count = 16;
-const size = 8;
+const size = 16;
 const spacing = 1;
-const width = count * (size + spacing) - 2 * spacing;
+const width = count * (size + spacing) - spacing;
 
 function render(callback, time, context){
   let index = 0;
@@ -74,11 +74,14 @@ fetch(s)
         }
       `);
 
-      const defaultTime = 6.5;
+      const defaultTime = 0;
 
       render(callback, defaultTime, context);
 
       let time;
+      let pausesStart;
+      let pausesEnd;
+      let pausedDuration = 0;
       let startTime;
       let active = false;
 
@@ -90,10 +93,10 @@ fetch(s)
         }
 
         if (!startTime) {
-          startTime = new Date();
+          startTime = Number(new Date());
           time = 0;
         } else {
-          time = (new Date() - startTime) / 1000;
+          time = (new Date() - startTime - pausedDuration) / 1000;
         }
 
         render(callback, time, context);
@@ -102,35 +105,61 @@ fetch(s)
       loop();
 
       function start(){
-        startTime = null;
+
+        if (active) {
+          return;
+        }
+
+        if (pausesStart) {
+          const duration = new Date() - pausesStart;
+          pausedDuration += duration;
+        }
+
         active = true;
         canvas.classList.add('active');
       }
 
       function stop(){
+
+        if (!active){
+          return;
+        }
+
         active = false;
-        startTime = null;
-        render(callback, defaultTime, context);
+        // startTime = null;
+        pausesStart = new Date();
+        // render(callback, defaultTime, context);
         canvas.classList.remove('active');
       }
 
-      if ('ontouchstart' in document.documentElement) {
-        link.addEventListener('click', (event)=> {
-          if (!active) {
-            event.stopPropagation();
-            event.preventDefault();
-            start();
-          } else {
-            document.location = url;
-          }
-        })
-      } else {
-        canvas.addEventListener('mouseover', start);
+
+      // canvas.addEventListener('mouseover', start);
+      // canvas.addEventListener('mouseout', stop);
+
+      let ticking = false;
+
+      function inView(){
+        const rect = link.getBoundingClientRect();
+        const height = window.innerHeight || document.documentElement.clientHeight;
+        if (rect.top >= 0 && rect.bottom <= height) {
+          start();
+        } else {
+          stop();
+        }
       }
 
+      document.addEventListener('scroll', function(e) {
+        if (!ticking) {
+          window.requestAnimationFrame(function() {
+            inView();
+            ticking = false;
+          });
 
+          ticking = true;
+        }
+      });
 
-      canvas.addEventListener('mouseout', stop);
+      inView();
 
     });
   });

@@ -2,13 +2,13 @@ body
   background: black
 
 #output
-  max-width: 800px
+  max-width: 1000px
   display: grid
   margin: auto
   justify-content: center
   grid-gap: 32px
   padding: 16px
-  grid-template-columns: repeat(auto-fit, minmax(142px, 142px));
+  grid-template-columns: repeat(auto-fit, minmax(271px, 271px));
 
   #title
     grid-column: 1 / -1
@@ -32,8 +32,7 @@ body
     -webkit-tap-highlight-color: #F24;
     canvas
       display flex
-      filter: grayscale(100%);
-      opacity: 0.7
-      &:hover, &.active
-        filter: none
+      opacity: 0.4
+      transition: opacity 0.2s ease-in-out;
+      &.active
         opacity: 1
