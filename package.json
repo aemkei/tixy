@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "gif.js.optimized": "^1.0.1",
-    "pureimage": "^0.2.5"
+    "pureimage": "^0.2.5",
+    "strip-comments": "^2.0.1"
   }
 }
