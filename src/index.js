@@ -28,6 +28,12 @@ function readURL() {
   }
 }
 
+function submitCode(code) {
+  const url = new URL(document.location);
+  url.searchParams.set('code', code);
+  history.replaceState(null, code, url);
+}
+
 readURL();
 
 function checkLength() {
@@ -77,9 +83,7 @@ input.addEventListener('blur', function () {
 
 editor.addEventListener('submit', (event) => {
   event.preventDefault();
-  const url = new URL(document.location);
-  url.searchParams.set('code', code);
-  history.replaceState(null, code, url);
+  submitCode(code)
 });
 
 function render() {
