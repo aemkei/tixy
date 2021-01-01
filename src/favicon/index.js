@@ -12,7 +12,7 @@ if (document.location.hash <= 1) {
 
 function updateCallback() {
   const url = new URL(document.location);
-  code = url.hash.substr(1);
+  code = decodeURIComponent(url.hash.substr(1));
 
   document.title = `(t,i,x,y) => ${code}`;
   startTime = null;

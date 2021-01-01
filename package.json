@@ -10,7 +10,7 @@
     "gallery": "parcel ./src/gallery/index.html --open --port 1236",
     "favicon": "parcel ./src/favicon/index.html --open --port 1237",
     "clean": "rm -Rf dist/",
-    "build": "parcel build ./src/index.html ./src/gif/index.html ./src/gallery/index.html ./src/assets/twitter-card.png",
+    "build": "parcel build ./src/index.html ./src/favicon/index.html ./src/gif/index.html ./src/gallery/index.html ./src/assets/twitter-card.png",
     "firebase": "firebase deploy --only hosting",
     "deploy": "npm run clean && npm run build && npm run firebase"
   },
