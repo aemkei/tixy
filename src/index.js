@@ -1,3 +1,5 @@
+const strip = require('strip-comments');
+
 const count = 16;
 const size = 16;
 const spacing = 1;
@@ -20,12 +22,61 @@ output.width = output.height = width * dpr;
 context.scale(dpr, dpr);
 output.style.width = output.style.height = `${width}px`;
 
+function fetchGist(gist) {
+  function extractCode(file) {
+    if (file.truncated === true) {
+      throw 'Javascript file larger them 1MB'
+    } else {
+      return strip(file.content)
+        .split(/[\r\n]+/)
+        .map(line => line.trim())
+        .join('')
+    }
+  }
+
+  function extractFile(files) {
+    const keys = Object.keys(files).filter(key => key.endsWith('.js'))
+    let key
+
+    if (files['tixy.js']) {
+      key = 'tixy.js'
+    } else if (keys.length === 0) {
+      throw 'No javascript file found'
+    } else if (keys.length > 1) {
+      throw 'Found multiple javascript file but no tixy.js'
+    } else {
+      key = keys[0];
+    }
+
+    return files[key]
+  }
+
+  fetch(`https://api.github.com/gists/${gist}`)
+    .then(response => response.ok ? response.json() : Promise.reject(response))
+    .then(response => extractFile(response.files))
+    .then(file => extractCode(file))
+    .then(code => {
+      input.value = code;
+      submitCode(code);
+      updateCallback()
+    })
+    .catch(error => console.log(error) && updateComments(['Could not loading Gist', error]))
+}
+
 function readURL() {
   const url = new URL(document.location);
 
   if (url.searchParams.has('code')) {
     input.value = url.searchParams.get('code');
+  } else if (url.searchParams.has('gist')) {
+    fetchGist(url.searchParams.get('gist'));
   }
+}
+
+function submitCode(code) {
+  const url = new URL(document.location);
+  url.searchParams.set('code', code);
+  history.replaceState(null, code, url);
 }
 
 readURL();
@@ -77,9 +128,7 @@ input.addEventListener('blur', function () {
 
 editor.addEventListener('submit', (event) => {
   event.preventDefault();
-  const url = new URL(document.location);
-  url.searchParams.set('code', code);
-  history.replaceState(null, code, url);
+  submitCode(code)
 });
 
 function render() {
@@ -91,7 +140,7 @@ function render() {
     startTime = new Date();
   }
 
-  if (!callback) {
+  if ( ! callback) {
     window.requestAnimationFrame(render);
     return;
   }
@@ -154,7 +203,7 @@ function updateCommentsForCode() {
   const index = snippets.indexOf(code);
   const newComment = comments[index];
 
-  if (!newComment) {
+  if ( ! newComment) {
     return;
   }
 
