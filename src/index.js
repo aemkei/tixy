@@ -14,7 +14,7 @@ const dpr = window.devicePixelRatio || 1;
 
 let callback = function () { };
 let startTime = null;
-let code = '';
+let code = 'Math.sin(y/8+t)';
 
 output.width = output.height = width * dpr;
 context.scale(dpr, dpr);
@@ -23,9 +23,8 @@ output.style.width = output.style.height = `${width}px`;
 function readURL() {
   const url = new URL(document.location);
 
-  if (url.searchParams.has('code')) {
-    input.value = url.searchParams.get('code');
-  }
+  input.value = url.searchParams.get('code') || code;
+
 }
 
 readURL();
