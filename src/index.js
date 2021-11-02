@@ -14,7 +14,7 @@ const dpr = window.devicePixelRatio || 1;
 
 let callback = function () { };
 let startTime = null;
-let code = '';
+let code = 'Math.sin(y/8+t)';
 
 output.width = output.height = width * dpr;
 context.scale(dpr, dpr);
@@ -23,9 +23,8 @@ output.style.width = output.style.height = `${width}px`;
 function readURL() {
   const url = new URL(document.location);
 
-  if (url.searchParams.has('code')) {
-    input.value = url.searchParams.get('code');
-  }
+  input.value = url.searchParams.get('code') || code;
+
 }
 
 readURL();
@@ -39,7 +38,7 @@ function checkLength() {
 }
 
 function updateCallback() {
-  code = input.value;
+  code = input.value.trim();
   startTime = null;
 
   checkLength();
@@ -75,11 +74,14 @@ input.addEventListener('blur', function () {
   editor.classList.remove('focus');
 });
 
-editor.addEventListener('submit', (event) => {
+input.addEventListener('keyup', (event) => {
   event.preventDefault();
-  const url = new URL(document.location);
-  url.searchParams.set('code', code);
-  history.replaceState(null, code, url);
+  if (!event.shiftKey && event.key === 'Enter') {
+    const url = new URL(document.location);
+    const param = code.trim()
+    url.searchParams.set('code', param);
+    history.replaceState(null, param, url);
+  }
 });
 
 function render() {
@@ -147,7 +149,7 @@ function updateComments(comments) {
 }
 
 function updateCommentsForCode() {
-  const code = input.value;
+  const code = input.value.trim();
 
   const snippets = Object.values(examples);
   const comments = Object.keys(examples);

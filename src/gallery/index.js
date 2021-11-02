@@ -1,5 +1,3 @@
-import s from './snippets.txt';
-
 const output = document.getElementById('output');
 const count = 16;
 const size = 16;
@@ -43,7 +41,7 @@ function render(callback, time, context){
   }
 }
 
-fetch(s)
+fetch('./snippets.txt')
   .then(response => response.text())
   .then(text => {
 
@@ -163,4 +161,3 @@ fetch(s)
 
     });
   });
-
